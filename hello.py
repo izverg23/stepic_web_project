@@ -1,4 +1,4 @@
-def wsgi_hello(environ, start_response) :
+def hello(environ, start_response) :
 	status = '200 OK'
 	headers = [ ('Content-Type', 'text/plan') ]
 	
@@ -7,8 +7,9 @@ def wsgi_hello(environ, start_response) :
 	body = ''
 	i = 0
 	for element in queryList :
-		body += element + '<br>'
+		body += element[i] + '<br>'
+		i += 1
 
 	print body
 	start_response(status, headers)
-	return [ body ]
+	return body
