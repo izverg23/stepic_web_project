@@ -3,7 +3,7 @@ CONFIG = {
     'working_dir': '/home/box/web',
     'python': '/usr/bin/python',
     'args': (
-        '--bind=127.0.0.1:8080',
+        '--bind=0.0.0.0:8080',
         '--workers=16',
         '--timeout=60',
 		'--log-level=debug',
