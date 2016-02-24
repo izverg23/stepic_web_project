@@ -1,10 +1,16 @@
+from urlparse import parse_qs
+
 def application(environ, start_response):                                       
 
-	queryString = environ['QUERY_STRING']
-	queryList = queryString.split('&')
+	queryString = parse_qs(environ['QUERY_STRING'], keep_blank_values=True)
 	body = ''
-	for element in queryList :
-		body += element + '\n'
+	print(queryString)
+	for key, value in queryString.items() :
+		body += key + ' = '
+		for element in value :
+			body += element + '\n'
+	
+	print(body)
 	status = '200 OK'                                                           
 	
 	response_headers = [                                                        
@@ -13,4 +19,4 @@ def application(environ, start_response):
 
 	start_response(status, response_headers)                                    
 
-	return [response_body]
+	return [body]
