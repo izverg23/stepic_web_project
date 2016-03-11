@@ -10,7 +10,7 @@ def index(request) :
 	print("HELLO_!!!!!!!!!")
 	pageLimit = 10
 	#Entry.objects.order_by(Coalesce('summary', 'headline').desc()) #asc()
-	qwests = Question.objects.all().order_by('-added_at')
+	qwests = Question.objects.all().order_by('-id')
 	
 	from django.core.paginator import Paginator
 	
@@ -25,7 +25,7 @@ def index(request) :
 		page = paginator.page(page)
 	except EmptyPage :
 		page = paginator.page(paginator.num_pages)
-	return render(request, '../template/questionList.html', {
+	return render(request, 'questionList.html', {
 		'title' : 'qwests and answers',
 		'list' : page.object_list,
 		'paginator' : paginator, 
@@ -51,7 +51,7 @@ def popular(request) :
 		page = paginator.page(page)
 	except EmptyPage :
 		page = paginator.page(paginator.num_pages)
-	return render(request, '../template/questionList.html', {
+	return render(request, 'questionList.html', {
 		'title' : 'popular quests',
 		'list' : page.object_list,
 		'paginator' : paginator, 
@@ -60,11 +60,11 @@ def popular(request) :
 
 def question(request, id) :
 	try :
-		quest = Question.objects.get(id = id)
+		quest = Question.objects.get('id' = id)
 	except Question.DoesNotExit :
 		raise Http404
 	answers = quest.Answer.all() #Answer.objects.all().filter(question = quest)
-	return render(request, '../template/question.html', {
+	return render(request, 'question.html', {
 		'title' : 'qwest ' + id,
 		'question' : quest,
 		'list' : answers,
