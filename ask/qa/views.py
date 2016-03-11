@@ -61,11 +61,14 @@ def popular(request) :
 def question(request, quest_id) :
 	try :
 		quest = Question.objects.get(id = quest_id)
-	except Question.DoesNotExit :
+	except Question.DoesNotExist :
 		raise Http404
-	answers = answer.question_set.all() #quest.Answer.all() #Answer.objects.all().filter(question = quest)
+	answers = Answer.objects.all().filter(question = quest)
+	
+	title = 'qwest ' + quest_id
+	
 	return render(request, 'question.html', {
-		'title' : 'qwest ' + id,
+		'title' : title,
 		'question' : quest,
 		'list' : answers,
 	})
