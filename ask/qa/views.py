@@ -26,7 +26,7 @@ def index(request) :
 	except EmptyPage :
 		page = paginator.page(paginator.num_pages)
 	return render(request, '../template/questionList.html', {
-		'title' : 'Вопросы и ответы',
+		'title' : 'qwests and answers',
 		'list' : page.object_list,
 		'paginator' : paginator, 
 		'page' : page,
@@ -52,7 +52,7 @@ def popular(request) :
 	except EmptyPage :
 		page = paginator.page(paginator.num_pages)
 	return render(request, '../template/questionList.html', {
-		'title' : 'Популярные вопросы',
+		'title' : 'popular quests',
 		'list' : page.object_list,
 		'paginator' : paginator, 
 		'page' : page,
@@ -65,7 +65,7 @@ def question(request, id) :
 		raise Http404
 	answers = quest.Answer.all() #Answer.objects.all().filter(question = quest)
 	return render(request, '../template/question.html', {
-		'title' : 'Вопрос №' + id,
+		'title' : 'qwest ' + id,
 		'question' : quest,
 		'list' : answers,
 	})
