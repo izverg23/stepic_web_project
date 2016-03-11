@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Question(models.Model) :
-	id = models.IntegerField(primary_key=True)
+	#id = models.IntegerField(primary_key=True)
 	title = models.CharField(max_length=255)
 	text = models.TextField()
 	added_at = models.DateTimeField(auto_now_add=True)

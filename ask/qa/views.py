@@ -58,12 +58,12 @@ def popular(request) :
 		'page' : page,
 	})
 
-def question(request, id) :
+def question(request, quest_id) :
 	try :
-		quest = Question.objects.get('id' = id)
+		quest = Question.objects.get(id = quest_id)
 	except Question.DoesNotExit :
 		raise Http404
-	answers = quest.Answer.all() #Answer.objects.all().filter(question = quest)
+	answers = answer.question_set.all() #quest.Answer.all() #Answer.objects.all().filter(question = quest)
 	return render(request, 'question.html', {
 		'title' : 'qwest ' + id,
 		'question' : quest,
