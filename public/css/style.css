@@ -1,0 +1,20 @@
+.question-list{
+	position: relative;
+	margin: 10px 20px;
+	padding: 20px;
+	border: 3px outset;
+}
+.question-list-title{
+	font-size: 16pt;
+	font-variant: small-caps;
+	margin: -7px;
+}
+.question-list-a{
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}
+
+.paginator-active{
+	font-weight: bold
+}

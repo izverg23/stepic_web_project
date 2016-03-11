@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+	{{ title }}
+{% endblock %}
+{% block content %}
+	<div class="question-list">
+		<h4 class="question-list-title">{{ question.title }}</h4>
+		<p class="question-list-text">{{ question.text }}</p>
+	</div>
+	Ответы : <br>
+	{% for obj in list %}
+		<div class="question-list">
+			<p class="question-list-text">{{ obj.text }}</p>
+		</div>
+	{% endfor %}
+{% endblock %}
+	

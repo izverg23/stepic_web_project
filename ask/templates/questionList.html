@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+	{{ title }}
+{% endblock %}
+{% block content %}
+	{% for obj in list %}
+		<div class="question-list">
+			<h4 class="question-list-title">{{ obj.title }}</h4>
+			<p class="question-list-text">{{ obj.text }}</p>
+			<a class="question-list-a" href="{{ obj.get_absolute_url }}">Посмотреть</a>
+		</div>
+	{% endfor %}
+	{# Peginator #}
+	<nav><ul>
+	{% for p in paginator.page_range %}
+		{% if p.number == page.number %}
+			<li class="paginator-active">
+		{% else %}
+			<li>
+		{% endif %}
+		<a href="{{ paginator.baseurl }}{{ p.number }}"> {{ p.number }}</a>
+		</li>
+	{% endfor %}
+	</ul></nav>
+{% endblock %}
