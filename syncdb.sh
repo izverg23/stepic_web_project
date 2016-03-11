@@ -1,0 +1,1 @@
+sudo python /home/box/web/ask/manage.py syncdb

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
+from qa.models import Question, Answer
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
@@ -23,7 +24,7 @@ def index(request) :
 		page = paginator.page(page)
 	except EmptyPage :
 		page = paginator.page(paginator.num_pages)
-	return render(request, '/template/questionList.html', {
+	return render(request, '../template/questionList.html', {
 		'title' : 'Вопросы и ответы',
 		'list' : page.object_list,
 		'paginator' : paginator, 
@@ -49,7 +50,7 @@ def popular(request) :
 		page = paginator.page(page)
 	except EmptyPage :
 		page = paginator.page(paginator.num_pages)
-	return render(request, '/template/questionList.html', {
+	return render(request, '../template/questionList.html', {
 		'title' : 'Популярные вопросы',
 		'list' : page.object_list,
 		'paginator' : paginator, 
@@ -62,7 +63,7 @@ def question(request, id) :
 	except Question.DoesNotExit :
 		raise Http404
 	answers = quest.Answer.all() #Answer.objects.all().filter(question = quest)
-	return render(request, '/template/question.html', {
+	return render(request, '../template/question.html', {
 		'title' : 'Вопрос №' + id,
 		'question' : quest,
 		'list' : answers,

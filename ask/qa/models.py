@@ -1,8 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Question(models.Model) :
-	id = models.IntegerField(primary_key=True)
 	title = models.CharField(max_length=255)
 	text = models.TextField()
 	added_at = models.DateTimeField(blank=True)
@@ -11,10 +11,10 @@ class Question(models.Model) :
 	likes = models.ManyToManyField(User)
 	
 	def get_absolute_url(self) :
-		return '/question/%d/' % self.id
+		return '/question/%d/' % self.pk
 
 class Answer(models.Model) :
 	text = models.TextField()
 	added_at = models.DateTimeField(blank=True)
-	question = models.ForeignKey(Question, related_name='id')
+	question = models.ForeignKey(Question, related_name='pk')
 	author = models.ForeignKey(User, related_name='+')
