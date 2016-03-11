@@ -7,6 +7,7 @@ def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
 def index(request) :
+	print("HELLO_!!!!!!!!!")
 	pageLimit = 10
 	#Entry.objects.order_by(Coalesce('summary', 'headline').desc()) #asc()
 	qwests = Question.objects.all().order_by('-added_at')
