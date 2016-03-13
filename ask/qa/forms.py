@@ -14,13 +14,16 @@ class AskForm(forms.Form) :
 		return text
 		
 	def save(self) :
-		quest = Question.objects.create(title=self.clean_title(), text=self.clean_text())
+		quest = Question.objects.create(title=self.cleaned_data['title'], text=self.cleaned_data['text'])
 		#quest.save()
 		return quest
 	
 class AnswerForm(forms.Form) :
 	text = forms.CharField(widget=forms.Textarea)
 	question = forms.IntegerField(widget=forms.HiddenInput)
+	
+	#def __init__(self, *args, **kwargs) :
+	#	super(AnswerForm, self).__init__(*args, **kwargs)
 	
 	def clean_text(self) :
 		text = self.cleaned_data['text']
@@ -34,6 +37,6 @@ class AnswerForm(forms.Form) :
 		return quest_id
 	
 	def save(self) :
-		answer = Answer.objects.create(text=self.clean_text(), question=self.clean_question())
+		answer = Answer.objects.create(text=self.cleaned_data['text'], question=self.cleaned_data['question'])
 		#answer.save()
 		return answer

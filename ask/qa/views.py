@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from qa.models import Question, Answer
 from qa.forms import AskForm, AnswerForm
@@ -83,7 +83,7 @@ def ask(request) :
 			print("FORM IS VALID!!!!!!!!!!!!")
 			quest = form.save()
 			print("QUEST IS CREATE!!!!!!!!!!")
-			url = quest.get_url()
+			url = quest.get_absolute_url()
 			print("URL = " + url +"!!!!!!!!!")
 			return HttpResponseRedirect(url)
 	else :
