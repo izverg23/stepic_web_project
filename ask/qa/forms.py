@@ -14,7 +14,7 @@ class AskForm(forms.Form) :
 		return text
 		
 	def save(self) :
-		quest = Question.objects.create(title=self.title, text=self.text, author=self.author)
+		quest = Question.objects.create(title=self.clean_title(), text=self.clean_text())
 		#quest.save()
 		return quest
 	
@@ -34,6 +34,6 @@ class AnswerForm(forms.Form) :
 		return quest_id
 	
 	def save(self) :
-		answer = Answer.objects.create(text=self.text, question=self.question, author=self.author)
+		answer = Answer.objects.create(text=self.clean_text(), question=self.clean_question())
 		#answer.save()
 		return answer

@@ -77,10 +77,14 @@ def question(request, quest_id) :
 
 def ask(request) :
 	if request.method == "POST" :
+		print("POST!!!!!!!!!!!!!!!!!!!!!!!!!")
 		form = AskForm(request.POST)
 		if form.is_valid():
+			print("FORM IS VALID!!!!!!!!!!!!")
 			quest = form.save()
+			print("QUEST IS CREATE!!!!!!!!!!")
 			url = quest.get_url()
+			print("URL = " + url +"!!!!!!!!!")
 			return HttpResponseRedirect(url)
 	else :
 		form = AskForm()
