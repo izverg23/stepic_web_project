@@ -19,7 +19,7 @@ class AskForm(forms.Form) :
 		return quest
 	
 class AnswerForm(forms.Form) :
-	text = forms.CharField(widget=foms.Textarea)
+	text = forms.CharField(widget=forms.Textarea)
 	question = forms.CharField(widget=forms.HiddenInput)
 	
 	def clean_text(self) :

@@ -84,7 +84,7 @@ def ask(request) :
 			return HttpResponseRedirect(url)
 	else :
 		form = AskForm()
-	return render(request, 'sdk_sdd.html', {
+	return render(request, 'ask_add.html', {
 		'form' : form
 	})
 	
