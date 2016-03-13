@@ -22,9 +22,6 @@ class AnswerForm(forms.Form) :
 	text = forms.CharField(widget=forms.Textarea)
 	question = forms.IntegerField(widget=forms.HiddenInput)
 	
-	#def __init__(self, *args, **kwargs) :
-	#	super(AnswerForm, self).__init__(*args, **kwargs)
-	
 	def clean_text(self) :
 		text = self.cleaned_data['text']
 		return text

@@ -66,7 +66,7 @@ def question(request, quest_id) :
 	answers = Answer.objects.all().filter(question = quest)
 	
 	title = 'qwest ' + quest_id
-	form = AnswerForm(question=quest_id)
+	form = AnswerForm(initial{'question' : quest_id})
 	
 	return render(request, 'question.html', {
 		'title' : title,
