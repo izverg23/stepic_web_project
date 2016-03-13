@@ -12,7 +12,7 @@ class Question(models.Model) :
 	likes = models.ManyToManyField(User)
 		
 	def get_absolute_url(self) :
-		return '/question/%d/' % self.id
+		return '/question/%d/' % self.pk
 
 class Answer(models.Model) :
 	text = models.TextField()
