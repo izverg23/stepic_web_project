@@ -69,8 +69,9 @@ def question(request, quest_id) :
 	title = 'qwest ' + quest_id
 	
 	user = request.user
+	
 	if user.is_authenticated() :
-		form = AnswerForm(initial{'question' : quest_id})
+		form = AnswerForm(initial={'question' : quest_id})
 	
 	return render(request, 'question.html', {
 		'title' : title,
@@ -112,12 +113,11 @@ def signup(request) :
 	if request.method == "POST" :
 		form = SignupForm(request.POST)
 		if form.is_valid() :
-			user = form.save()
-			input = form.loginUser()
-			if input is not None :
-				if input.is_active :
-					login(request, user)
-					return HttpResponseRedirect("/")
+			form.save()
+			#user = form.loginUser()
+			user = authenticate(username=request.POST['username'], password=request.POST['password'])
+			login(request, user)
+			return HttpResponseRedirect("/")
 	else :
 		form = SignupForm()
 	return render(request, 'ask_add.html', {
