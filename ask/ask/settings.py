@@ -48,6 +48,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+)
+
 ROOT_URLCONF = 'ask.urls'
 
 WSGI_APPLICATION = 'ask.wsgi.application'
