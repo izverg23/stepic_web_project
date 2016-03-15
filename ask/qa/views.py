@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from qa.models import Question, Answer
 from django.contrib.auth import authenticate, login
-from qa.forms import AskForm, AnswerForm, SignupForm
+from django.contrib.auth.models import User
+from qa.forms import AskForm, AnswerForm, SignupForm, LoginForm
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
@@ -113,9 +114,9 @@ def signup(request) :
 	if request.method == "POST" :
 		form = SignupForm(request.POST)
 		if form.is_valid() :
-			form.save()
+			user = form.save()
 			#user = form.loginUser()
-			user = authenticate(username=request.POST['username'], password=request.POST['password'])
+			#user = authenticate(username=request.POST['username'], password=request.POST['password'])
 			login(request, user)
 			return HttpResponseRedirect("/")
 	else :
