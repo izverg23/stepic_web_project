@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.http import Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from qa.models import Question, Answer
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -115,13 +114,13 @@ def signup(request) :
 		form = SignupForm(request.POST)
 		if form.is_valid() :
 			user = form.save()
-			#user = form.loginUser()
+			user = form.loginUser()
 			#user = authenticate(username=request.POST['username'], password=request.POST['password'])
 			login(request, user)
 			return HttpResponseRedirect("/")
 	else :
 		form = SignupForm()
-	return render(request, 'user.html', {
+	return render(request, 'ask_add.html', {
 		'form' : form,
 	})
 	
@@ -136,6 +135,6 @@ def login(request) :
 					return HttpResponseRedirect("/")
 	else :
 		form = LoginForm()
-	return render(request, 'user.html', {
+	return render(request, 'ask_add.html', {
 		'form' : form,
 	})
