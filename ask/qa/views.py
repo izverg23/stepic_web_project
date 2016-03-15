@@ -121,7 +121,7 @@ def signup(request) :
 			return HttpResponseRedirect("/")
 	else :
 		form = SignupForm()
-	return render(request, 'ask_add.html', {
+	return render(request, 'user.html', {
 		'form' : form,
 	})
 	
@@ -136,4 +136,6 @@ def login(request) :
 					return HttpResponseRedirect("/")
 	else :
 		form = LoginForm()
-	return render(request)
+	return render(request, 'user.html', {
+		'form' : form,
+	})
