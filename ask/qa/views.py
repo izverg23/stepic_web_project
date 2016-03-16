@@ -82,19 +82,20 @@ def question(request, quest_id) :
 
 def ask(request) :
 	user = request.user
-	if not user.is_authenticated():
-		raise Http404
 	if request.method == "POST" :
 		#print("POST!!!!!!!!!!!!!!!!!!!!!!!!!")
 		form = AskForm(request.POST)
-		if form.is_valid():
-			#print("FORM IS VALID!!!!!!!!!!!!")
-			form.author = user
-			quest = form.save()
-			#print("QUEST IS CREATE!!!!!!!!!!")
-			url = quest.get_absolute_url()
-			#print("URL = " + url +"!!!!!!!!!")
-			return HttpResponseRedirect(url)
+		if form.is_valid() :
+			if user.is_authenticated() :
+				#print("FORM IS VALID!!!!!!!!!!!!")
+				form.author = user
+				quest = form.save()
+				#print("QUEST IS CREATE!!!!!!!!!!")
+				url = quest.get_absolute_url()
+				#print("URL = " + url +"!!!!!!!!!")
+				return HttpResponseRedirect(url)
+			else :
+				raise Http404
 	else :
 		form = AskForm()
 	return render(request, 'ask_add.html', {
@@ -102,27 +103,32 @@ def ask(request) :
 	})
 	
 def answer(request) :
+	user = request.user
 	if request.method == "POST" :
 		form = AnswerForm(request.POST)
 		if form.is_valid():
-			answer = form.save()
-			url = '/question/' + form.question
-			return HttpResponseRedirect(url)
+			if user.is_authenticated() :
+				form.author = user
+				answer = form.save()
+				url = '/question/' + form.question
+				return HttpResponseRedirect(url)
+			else :
+				raise Http404
 			
 def signup(request) :
 	if request.method == "POST" :
 		form = SignupForm(request.POST)
 		if form.is_valid() :
-			print("POST!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			print("username: " + request.POST.get("username") + "!")
-			print("password: " + request.POST.get("password") + "!")
-			print("email: " + request.POST.get("email") + "!")
+			#print("POST!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+			#print("username: " + request.POST.get("username") + "!")
+			#print("password: " + request.POST.get("password") + "!")
+			#print("email: " + request.POST.get("email") + "!")
 			form.set_password(request.POST.get("password"))
 			user = form.save()
-			print("SAVE USER!!!!!!!!!!!!!!!!!!!!!!!")
-			print("username: " + user.username + " !")
-			print("password: " + user.password + " !")
-			print("email: " + user.email + " !")
+			#print("SAVE USER!!!!!!!!!!!!!!!!!!!!!!!")
+			#print("username: " + user.username + " !")
+			#print("password: " + user.password + " !")
+			#print("email: " + user.email + " !")
 			form.loginUser(request)
 			return HttpResponseRedirect("/")
 	else :
