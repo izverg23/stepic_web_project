@@ -122,9 +122,7 @@ def signup(request) :
 			print("username: " + user.username + " !")
 			print("password: " + user.password + " !")
 			print("email: " + user.email + " !")
-			form.loginUser()			
-			#user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
-			login(request, user)
+			form.loginUser(request)
 			return HttpResponseRedirect("/")
 	else :
 		form = SignupForm()
@@ -136,11 +134,8 @@ def login(request) :
 	if request.method == "POST" :
 		form = LoginForm(request.POST)
 		if form.is_valid() :
-			user = form.loginUser()
-			if user is not None :
-				if user.is_active :
-					login(request, user)
-					return HttpResponseRedirect("/")
+			user = form.loginUser(request)
+			return HttpResponseRedirect("/")
 	else :
 		form = LoginForm()
 	return render(request, 'ask_add.html', {

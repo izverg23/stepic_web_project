@@ -59,11 +59,13 @@ class SignupForm(forms.Form) :
 		password = self.cleaned_data['password']
 		
 	def save(self) :
-		user = User.objects.create_user(self.cleaned_data['username'], self.cleaned_data['email'], self.cleaned_data['password'])
+		user = User.objects.create_user(self.clean_username(), self.clean_email(), self.clean_password())
+		user.save()
 		return user
 	
-	def loginUser(self) :
-		user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+	def loginUser(self, request) :
+		user = authenticate(username=self.clean_username(), password=self.clean_password())
+		login(request, user)
 		return user
 		
 class LoginForm(forms.Form) :
@@ -77,6 +79,7 @@ class LoginForm(forms.Form) :
 	def clean_password(self) :
 		password = self.cleaned_data['password']
 		
-	def loginUser(self) :
-		user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+	def loginUser(self, request) :
+		user = authenticate(username=self.clean_username(), password=self.clean_password())
+		login(request, user)
 		return user
