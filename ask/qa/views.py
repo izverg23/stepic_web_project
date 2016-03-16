@@ -117,6 +117,7 @@ def signup(request) :
 			print("username: " + request.POST.get("username") + "!")
 			print("password: " + request.POST.get("password") + "!")
 			print("email: " + request.POST.get("email") + "!")
+			form.set_password(request.POST.get("password"))
 			user = form.save()
 			print("SAVE USER!!!!!!!!!!!!!!!!!!!!!!!")
 			print("username: " + user.username + " !")
@@ -134,6 +135,7 @@ def login(request) :
 	if request.method == "POST" :
 		form = LoginForm(request.POST)
 		if form.is_valid() :
+			form.set_password(request.POST.get("password"))
 			user = form.loginUser(request)
 			return HttpResponseRedirect("/")
 	else :
